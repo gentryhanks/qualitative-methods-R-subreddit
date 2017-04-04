@@ -26,8 +26,12 @@ filter_by_anything("data") %>%
   filter(grepl("open source", body)) %>%
   pluck("body")
   
-filter_by_anything("csv")
-
+filter_by_anything("csv")%>%
+  filter(!duplicated(author)) %>%
+  select(author_flair_text) %>%
+  pluck("author_flair_text") %>%
+  length()
+  
 filter_by_anything("malfunction")
 
 filter_by_anything("API")
