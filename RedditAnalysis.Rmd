@@ -1,11 +1,15 @@
 ---
-title: "R Notebook"
+title: "Qualitative Analysis of Reddit Data Using R"
+
 output: html_notebook
+bibliography: dissertation_bibliography.bib
+csl: apa.csl
 ---
+### Gentry Hanks, Queen's University
+# Abstract
+@adams_boundless_2005
+The embodiment of surveillant technologies provides a means and site of production of data to be consumed by both the self and the medical gaze with physical and emotional consequences. Analyzing discourse on the subreddit r/diabetes, I examine assemblages of surveillant technologies that render an ever-increasing quantified self for those using insulin pumps and glucose monitors. Haraway (1990) brought cyborgs to the fore in the early 1990s and Lupton (2000) describes cyborgs ``When hooked up to medical (and other) technologies, the patient's body becomes a cyborg, a juncture of human flesh and machine'' (p.56). Bodies are rendered regulatable through the use of embodied and disembodied technologies. People with any type of diabetes may be treated with insulin, which can be self-administered through multiple daily injections or through an insulin pump. Insulin pumps, as well as insulin, are proprietary. There is a growing do-it-yourself movement when it comes to hacking the cyborg self. Open source communities have made headway in generating new technology, reappropriating old devices or implementing everyday hacks of hardware and its fleshy interface (Forlano, 2016). Lupton (2016) describes these devices and data as intermingling within a data economy, which I argue in the case of diabetes are used in surveillance and the medical gaze. Devices used to manage diabetes quantify the self and datify the device user. These data as perceived by medical practitioners, family members, friends, strangers and last, but not least, the self can have significant effects on everyday life, socio-spatial relations and emotional health.
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
-
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
 
 ```{r}
 library(dplyr) # dplyr is library written by Hadley Wickham for easy manipulation of data. See https://cran.r-project.org/web/packages/dplyr/index.html to download or http://dplyr.tidyverse.org/
