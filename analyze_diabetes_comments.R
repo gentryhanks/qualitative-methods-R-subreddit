@@ -55,11 +55,20 @@ filter_by_anything("cyborg") %>%
   select(created_utc, archived) %>%
   arrange(created_utc) %>%
   as.data.frame()
-
-
+# How do people with diabetes who wear insulin pumps (cyborgs) access their own data?
 filter_by_anything("data") %>%
   filter(grepl("open source", body)) %>%
-  pluck("body")
+  as.data.frame()
+# One of the comments this yielded was interesting for answering our question. ``8  There is so much going on in this
+#field right now. In the past, people were pretty limited in what they could do with technology to manage their diabetes,
+#because the type of technology wasn't considered in the FDA approval process (i.e. it had to jump through all the 
+#same hoops that a new pump model would, even if it was just an app that was reading data, not writing it). Even at 
+#that time, people were still coming up with ideas. In particular, I can think of a user here who set up an IFTTT 
+#program that would let him text his sugar to a number and then it would be automatically logged in a Google spreadsheet.
+#He shared the code here and I was able to set it up for myself, too. I probably still have the code snippet somewhere.
+#\n\nNow there has been a proliferation of diabetes related apps. There are some that gamify your care. An example is 
+#[MySugr](https://mysugr.com/) where you make very detailed log entries to get more points to "feed the monster" and 
+#if you hit a certain number ... <truncated>""
 
 filter_by_anything("csv")%>%
   filter(!duplicated(author)) %>%
