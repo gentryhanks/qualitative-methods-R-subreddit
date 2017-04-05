@@ -11,10 +11,11 @@ csl: apa.csl
 The embodiment of surveillant technologies provides a means and site of production of data to be consumed by both the self and the medical gaze with physical and emotional consequences. Analyzing discourse on the subreddit r/diabetes, I examine assemblages of surveillant technologies that render an ever-increasing quantified self for those using insulin pumps and glucose monitors. @haraway_simians_1990 brought cyborgs to the fore in the early 1990s and @lupton_technology_2000 describes cyborgs ``When hooked up to medical (and other) technologies, the patient's body becomes a cyborg, a juncture of human flesh and machine'' (p.56). Bodies are rendered regulatable through the use of embodied and disembodied technologies. People with any type of diabetes may be treated with insulin, which can be self-administered through multiple daily injections or through an insulin pump. Insulin pumps, as well as insulin, are proprietary. There is a growing do-it-yourself movement when it comes to hacking the cyborg self. Open source communities have made headway in generating new technology, reappropriating old devices or implementing everyday hacks of hardware and its fleshy interface (@forlano_hacking_2016). @lupton2016foreword describes these devices and data as intermingling within a data economy, which I argue in the case of diabetes are used in surveillance and the medical gaze. Devices used to manage diabetes quantify the self and datify the device user. These data as perceived by medical practitioners, family members, friends, strangers and last, but not least, the self can have significant effects on everyday life, socio-spatial relations and emotional health.
 
 # Methods
-While geographers like @crooks2006embodied have used the proprietary software, NVivo, for analyzing text and geographers @aitken2010gis, @elwood2009qualitative, and @elwood_mixed_2010 have taken traditionally quantitative tools and reappropriated them for qualitative research in GIS, there has been little work done using or writing about reappropriating traditionally quantitative opensource tools like R.
+Geographers like @crooks2006embodied have used the proprietary software, NVivo, for analyzing text, while geographers like  @elwood2009qualitative, @aitken2010gis, @elwood_mixed_2010, and @wilson2015paying and have taken traditionally quantitative tools and reappropriated them for qualitative, critical and mixed-method research in GIS; however, there has been little work done using or writing about reappropriating traditionally quantitative opensource tools like R.
 
 What is R?
 R is a computer programming language developed out of S. It is an opensource language and a GNU project. It has a large, active community, which is one of its largest assets.
+
 
 ```{r}
 library(dplyr) # dplyr is a library written by Hadley Wickham for easy manipulation of data. See https://cran.r-project.org/web/packages/dplyr/index.html to download or http://dplyr.tidyverse.org/
@@ -22,12 +23,12 @@ library(readr) # Hadley Wickham made readr to make it easier for reading many ki
 library(ggplot2) # This is a plotting system for R, also by Hadley Wickham. See http://ggplot2.org/.
 ```
 ```{r, message=FALSE}
-#a data frame is a data structure like a spreadsheet that uses code instead of a graphical user interface.
+#a data frame is a data structure like a spreadsheet that uses code instead of a graphical user interface (although it could be argued that this is a graphical user interface.
 
 
 d <- read_csv("~/Downloads/reddit_diabetes.csv") #This data set was accessed through the reddit API and is publicly available.
 ```
-Here I create the filter_by_anything function for key word searches.
+Below I create the filter_by_anything function for key word searches.
 ```{r}
 filter_by_anything <- function(.data, pattern) { #pattern here just means an input to be matched.
   .data %>%
