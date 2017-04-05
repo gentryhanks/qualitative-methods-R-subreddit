@@ -1,0 +1,54 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+library(dplyr) # dplyr is library written by Hadley Wickham for easy manipulation of data. See https://cran.r-project.org/web/packages/dplyr/index.html to download or http://dplyr.tidyverse.org/
+library(readr)
+library(ggplot2) # This is a plotting system for R, also by Hadley Wickham. See http://ggplot2.org/.
+```
+```{r, message=FALSE}
+#a data frame is a data structure like a spreadsheet that uses code instead of a graphical user interface.
+
+
+d <- read_csv("~/Downloads/reddit_diabetes.csv") #This data set was accessed through the reddit API and is publicly available.
+```
+
+```{r}
+d %>%
+  mutate(label = ifelse(grepl("pump", author_flair_text, ignore.case=TRUE) &
+                          grepl("MDI", author_flair_text, ignore.case=TRUE), "pump & MDI", 
+                        ifelse(grepl("pump", author_flair_text), "pumper",
+                               ifelse(grepl("MDI", author_flair_text, ignore.case=TRUE), "MDI", NA)))) %>%
+  select(author, author_flair_text, label) %>%
+  filter(label == "pump & MDI" & !duplicated(author)) %>%
+  as.data.frame() %>%
+  nrow()
+
+
+#Based on flair, how many authors have changed their flair from MDI to pump or pump to MDI?
+
+
+d %>%
+  mutate(label = ifelse(grepl("pump", author_flair_text, ignore.case=TRUE) &
+                          grepl("MDI", author_flair_text, ignore.case=TRUE), "pump & MDI", 
+                        ifelse(grepl("pump", author_flair_text), "pumper",
+                               ifelse(grepl("MDI", author_flair_text, ignore.case=TRUE), "MDI", NA)))) %>%
+  select(author, author_flair_text, label, created_utc) %>%
+  # mutate(created_utc = as.POSIXct(created_utc, origin = "1970-01-01")) %>%
+  # arrange(author, created_utc)
+  filter(!is.na(label)) %>%
+  group_by(author) %>%
+  filter(!duplicated(label)) %>%
+  count(author, sort = TRUE)
+
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file).
