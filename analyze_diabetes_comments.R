@@ -76,12 +76,17 @@ filter_by_anything("csv")%>%
   pluck("author_flair_text") %>%
   length()
 
+d %>%
 filter_by_anything("malfunction")
-
+d %>%
 filter_by_anything("API")
-
+d %>%
 filter_by_anything("hack")
 
+d %>%
+filter_by_anything("infusion") %>%
+  filter(grepl("cgm", author_flair_text, ignore.case=TRUE) &
+  filter (grepl("MDI", author_flair_text, ignore.case=TRUE)))
 
 summary(d)
 

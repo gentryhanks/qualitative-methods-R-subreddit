@@ -6,15 +6,22 @@ bibliography: dissertation_bibliography.bib
 csl: apa.csl
 ---
 ### Gentry Hanks, Queen's University
+### AAG April 07, 2017: Boston, MA
 # Abstract
 
-The embodiment of surveillant technologies provides a means and site of production of data to be consumed by both the self and the medical gaze with physical and emotional consequences. Analyzing discourse on the subreddit r/diabetes, I examine assemblages of surveillant technologies that render an ever-increasing quantified self for those using insulin pumps and glucose monitors. @haraway_simians_1990 brought cyborgs to the fore in the early 1990s and @lupton_technology_2000 describes cyborgs ``When hooked up to medical (and other) technologies, the patient's body becomes a cyborg, a juncture of human flesh and machine'' (p.56). Bodies are rendered regulatable through the use of embodied and disembodied technologies. People with any type of diabetes may be treated with insulin, which can be self-administered through multiple daily injections or through an insulin pump. Insulin pumps, as well as insulin, are proprietary. There is a growing do-it-yourself movement when it comes to hacking the cyborg self. Open source communities have made headway in generating new technology, reappropriating old devices or implementing everyday hacks of hardware and its fleshy interface (@forlano_hacking_2016). @lupton2016foreword describes these devices and data as intermingling within a data economy, which I argue in the case of diabetes are used in surveillance and the medical gaze. Devices used to manage diabetes quantify the self and datify the device user. These data as perceived by medical practitioners, family members, friends, strangers and last, but not least, the self can have significant effects on everyday life, socio-spatial relations and emotional health.
+The embodiment of surveillant technologies provides a means and site of production of data to be consumed by both the self and the medical gaze with physical and emotional consequences. Analyzing discourse on the subreddit r/diabetes, I examine assemblages of surveillant technologies that render an ever-increasing quantified self for those using insulin pumps and glucose monitors. @haraway_simians_1990 brought cyborgs to the fore in the early 1990s and @lupton_technology_2000 describes cyborgs ``When hooked up to medical (and other) technologies, the patient's body becomes a cyborg, a juncture of human flesh and machine'' (p.56). Bodies are rendered regulatable through the use of embodied and disembodied technologies. People with any type of diabetes may be treated with insulin, which can be self-administered through multiple daily injections or through an insulin pump. Insulin pumps, as well as insulin, are proprietary. There is a growing do-it-yourself movement when it comes to hacking the cyborg self. Open source communities have made headway in generating new technology, reappropriating old devices or implementing everyday hacks of hardware and its fleshy interface [@forlano_hacking_2016]. @lupton2016foreword describes these devices and data as intermingling within a data economy, which I argue in the case of diabetes are used in surveillance and the medical gaze. Devices used to manage diabetes quantify the self and datify the device user. These data as perceived by medical practitioners, family members, friends, strangers and last, but not least, the self can have significant effects on everyday life, socio-spatial relations and emotional health.
 
-# Methods
-Geographers like @crooks2006embodied have used the proprietary software, NVivo, for analyzing text, while geographers like  @elwood2009qualitative, @aitken2010gis, @elwood_mixed_2010, and @wilson2015paying and have taken traditionally quantitative tools and reappropriated them for qualitative, critical and mixed-method research in GIS; however, there has been little work done using or writing about reappropriating traditionally quantitative opensource tools like R.
+# Methods and Methodologies
+I have observed the online community called r/diabetes, key word searched through the reddit GUI (graphical user interface), and am using R to analyze user-generated, textual data and its metadata from a subreddit of reddit called r/diabetes. For today's presentation, I will focus on using R.
 
 What is R?
-R is a computer programming language developed out of S. It is an opensource language and a GNU project. It has a large, active community, which is one of its largest assets.
+R is a computer programming language developed out of S. It is an opensource language and a GNU project. It has a large, active contributing community, which is one of its largest assets. Geographers such as @kitchin_code_2011 discuss the importance and pervasiveness of code and software in our everyday lives.
+
+Geographers like @crooks2006embodied have used the proprietary software, NVivo, for analyzing text, while geographers like @elwood2009qualitative, @aitken2010gis, @elwood_mixed_2010, and @wilson2015paying have taken traditionally quantitative tools and reappropriated them for qualitative, critical and mixed-method research in GIS; however, there has been little work done using or writing about reappropriating traditionally quantitative opensource tools like R.
+This type of reappropriation could merely be considered an epistemological or methodological challenge that "disrupts efforts to constrain empistemological diversity"" [@elwood_mixed_2010, p. 106]. This research therefore uses both inductive and deductive approaches, which @elwood_mixed_2010 asserts "challenge[s] the proposition that epistemologies are necessarily separate and singular" (p. 107). 
+
+Using R to analayze social media data is not a sort of panacea for looking at larger amounts of data or somehow claiming this way as new and therefore superios, but instead is what @delyser2014crossing calls , ``an embrace of engagedmethodological pluralism, where different and divergent methods flourish to tackle issues from
+different angles'' (p. 303).
 
 
 ```{r}
@@ -28,7 +35,7 @@ library(ggplot2) # This is a plotting system for R, also by Hadley Wickham. See 
 
 d <- read_csv("~/Downloads/reddit_diabetes.csv") #This data set was accessed through the reddit API and is publicly available.
 ```
-Below I create the filter_by_anything function for key word searches.
+Below I create the `filter_by_anything` function for key word searches.
 ```{r}
 filter_by_anything <- function(.data, pattern) { #pattern here just means an input to be matched.
   .data %>%
@@ -70,4 +77,4 @@ d %>%
   as.data.frame()
 ```
 
-I accessed the reddit data 
+To make this data set and code available and accessible, I am hosting it in an S3 bucket through Amazon Web Services (AWS). It is also important, from a feminist methodological perspective, to make my research available to the community with whose data I worked and will post my github repository as well as my r notebook to the subreddit once completed. Using r notebook also makes my research readily available through auto generation of html for immediate web hosting.  
