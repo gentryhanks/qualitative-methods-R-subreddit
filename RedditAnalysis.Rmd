@@ -5,17 +5,17 @@ output: html_notebook
 bibliography: dissertation_bibliography.bib
 csl: apa.csl
 ---
-### Gentry Hanks, Queen's University
+### Gentry Hanks, Queen's University, Twitter: \@gentryhanks
 ### AAG April 07, 2017: Boston, MA
 # Abstract
 
 The embodiment of surveillant technologies provides a means and site of production of data to be consumed by both the self and the medical gaze with physical and emotional consequences. Analyzing discourse on the subreddit r/diabetes, I examine assemblages of surveillant technologies that render an ever-increasing quantified self for those using insulin pumps and glucose monitors. @haraway_simians_1990 brought cyborgs to the fore in the early 1990s and @lupton_technology_2000 describes cyborgs ``When hooked up to medical (and other) technologies, the patient's body becomes a cyborg, a juncture of human flesh and machine'' (p.56). Bodies are rendered regulatable through the use of embodied and disembodied technologies. People with any type of diabetes may be treated with insulin, which can be self-administered through multiple daily injections or through an insulin pump. Insulin pumps, as well as insulin, are proprietary. There is a growing do-it-yourself movement when it comes to hacking the cyborg self. Open source communities have made headway in generating new technology, reappropriating old devices or implementing everyday hacks of hardware and its fleshy interface [@forlano_hacking_2016]. @lupton2016foreword describes these devices and data as intermingling within a data economy, which I argue in the case of diabetes are used in surveillance and the medical gaze. Devices used to manage diabetes quantify the self and datify the device user. These data as perceived by medical practitioners, family members, friends, strangers and last, but not least, the self can have significant effects on everyday life, socio-spatial relations and emotional health.
 
-# Methods and Methodologies: Qualitative Analysis of Reddit Data Using R
-I have observed the online community called r/diabetes, key word searched through the reddit GUI (graphical user interface), and am using R to analyze user-generated, textual data and its metadata from a subreddit of reddit called r/diabetes. For today's presentation, I will focus on using R.
+# Methods and Methodologies: Mixed Methods & Reddit Data Using R
+I have observed the online community called r/diabetes, key word searched through the reddit GUI (graphical user interface), and am using R to analyze user-generated, textual data and its metadata from a subreddit of reddit called r/diabetes. I chose to use reddit data due to its availability. Additionally I chose Reddit because their TOS provides no expectation of prvacy to the users. For today's presentation, I will focus on using R to explore this large data set.
 
 What is R?
-R is a computer programming language developed out of S [@R_2013]. It is an opensource language and a GNU project. It has a large, active contributing community, which is one of its largest assets. Geographers such as @kitchin_code_2011 discuss the importance and pervasiveness of code and software in our everyday lives.
+Geographers such as @kitchin_code_2011 discuss the importance and pervasiveness of code and software in our everyday lives. R is a computer programming language developed out of S [@R_2013]. It is an opensource language and a GNU project. It has a large, active contributing community, which is one of its largest assets. A one the most prolific contributors is Hadley Wickham, who developed all of the libraries I use in this project [@wickham2015dplyr].
 
 Geographers like @crooks2006embodied have used the proprietary software, NVivo, for analyzing text, while geographers like @elwood2009qualitative, @aitken2010gis, @elwood_mixed_2010, and @wilson2015paying have taken traditionally quantitative tools and reappropriated them for qualitative, critical and mixed-method research in GIS; however, there has been little work done using or writing about reappropriating traditionally quantitative opensource tools like R.
 This type of reappropriation could merely be considered an epistemological or methodological challenge that "disrupts efforts to constrain empistemological diversity"" [@elwood_mixed_2010, p. 106]. This research therefore uses both inductive and deductive approaches, which @elwood_mixed_2010 asserts "challenge[s] the proposition that epistemologies are necessarily separate and singular" (p. 107). 
@@ -33,11 +33,11 @@ library(ggplot2) # This is a plotting system for R, also by Hadley Wickham. See 
 #a data frame is a data structure like a spreadsheet that uses code instead of a graphical user interface (although it could be argued that this is a graphical user interface.
 
 
-d <- read_csv("~/Downloads/reddit_diabetes.csv") #T his data set was accessed through the reddit API and is publicly available.
+d <- read_csv("~/Downloads/reddit_diabetes.csv") # This data set was accessed through the reddit API and is publicly available.
 ```
-Below I create the `filter_by_anything` function for key word searches of the comment body.
+Below I create the `filter_by_anything` function for key word searches.
 ```{r}
-filter_by_anything <- function(.data, pattern) { # pattern here just means an input to be matched.
+filter_by_anything <- function(.data, pattern) { # Pattern here just means an input to be matched.
   .data %>%
     filter(grepl(pattern, body))
 }
@@ -52,7 +52,8 @@ d %>%
 # "There is so much going on in this field right now. In the past, people were pretty limited in what they could do with technology to manage their diabetes,because the type of technology wasn't considered in the FDA approval process (i.e. it had to jump through all the same hoops that a new pump model would, even if it was just an app that was reading data, not writing it). Even at that time, people were still coming up with ideas. In particular, I can think of a user here who set up an IFTTT program that would let him text his sugar to a number and then it would be automatically logged in a Google spreadsheet.He shared the code here and I was able to set it up for myself, too. I probably still have the code snippet somewhere.\n\nNow there has been a proliferation of diabetes related apps. There are some that gamify your care. An example is #[MySugr](https://mysugr.com/) where you make very detailed log entries to get more points to "feed the monster" and if you hit a certain number ... <truncated>"
 
 ```
-Or I might try to look at other pertinent key words that would contain discussions of how commenters access their data. Here I decide to use an inclusive or to gather posts containing any or all of the arguments.
+
+Or I might try to look at other pertinent key words that would contain discussions of how commenters access their data. Here I decided to use an inclusive or to gather posts containing any or all of the arguments.
 ```{r}
 d %>%
   filter(grepl(" API ", body, ignore.case=TRUE) | # Means "or"" as in boolean logic (inclusive or)
@@ -64,8 +65,6 @@ d %>%
            grepl("reverse engineer", body, ignore.case=TRUE)) %>%
   sample_n(35) %>%
   as.data.frame()
-  
-  
 ```
 
 ### The next question I'd like to explore is:  How do people in this community feel about wearing an embodied medical device in everyday life?
@@ -80,7 +79,8 @@ d %>%
 
 
 
-There are so many potential ways to look at unstructured data using R and dplyr, it really is up to the imagination. As you can see it yields some pretty rich data, which ultimately is filtered through the researcher. 
+
+There are so many potential ways to look at unstructured data using R and dplyr, it really is up to the imagination. As you can see it yields some pretty rich data, which ultimately is filtered through the researcher. There are many limitations to this mixing up of methods. Trustworthiness of internet data is of concern [@hartig2008trustworthiness], but there is little incentive to lie in this subreddit.  
 
 The larger reddit data corpus is publicly available at https://archive.org/details/2015_reddit_comments_corpus. To make this data set and code available and accessible, I am hosting it in an S3 bucket through Amazon Web Services (AWS). It is also important, from a feminist methodological perspective, to make my research available to the community with whose data I worked and will post my github repository as well as my r notebook https://s3.amazonaws.com/gentryhanks-analysis/RedditAnalysis.nb.html to the subreddit once completed. Using r notebook also makes my research readily available through auto generation of html for immediate web hosting.  
 
@@ -88,5 +88,18 @@ Insulin pump and continuous glucose monitor users generate large amounts of data
 
 
 # Discussion Questions
+
+
+
+
+
+http://www.gentryhanks.com
+
+Visit my R notebook and GitHub repo on r/diabetes reddit data! 
+R notebook: http://bit.ly/2nI79VL  
+GitHub: http://bit.ly/2ngWlSR 
+
+
+
 
 # Bibliography
