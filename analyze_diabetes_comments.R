@@ -76,18 +76,30 @@ filter_by_anything("csv")%>%
   pluck("author_flair_text") %>%
   length()
 
-d %>%
-filter_by_anything("malfunction")
-d %>%
-filter_by_anything("API")
-d %>%
-filter_by_anything("hack")
+
 
 d %>%
-filter_by_anything("infusion") %>%
-  filter(grepl("cgm", author_flair_text, ignore.case=TRUE) &
-  filter (grepl("MDI", author_flair_text, ignore.case=TRUE)))
+  filter(grepl("API", body, ignore.case=TRUE) |
+           grepl("Wireless", body, ignore.case=TRUE) |
+           grepl(" hack ", body, ignore.case=TRUE) |
+           grepl("blue tooth", body, ignore.case=TRUE) |
+           grepl("bluetooth", body, ignore.case=TRUE) |
+           grepl("reverse engineer", body, ignore.case=TRUE)) # There are 26 posts with reverse engineer in them.
 
+# Running this returns 4,787 comments
+
+
+d %>% 
+  filter_by_anything("reverse engineer")
+
+
+d %>%
+  filter_by_anything("infusion") |
+  filter(grepl("cgm", author_flair_text, ignore.case=TRUE) %>%
+           filter (grepl("MDI", author_flair_text, ignore.case=TRUE)))
+
+d %>%
+  filter_by_anything("malfunction")
 summary(d)
 
 d
