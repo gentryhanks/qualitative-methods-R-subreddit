@@ -87,7 +87,8 @@ d %>%
            grepl("reverse engineer", body, ignore.case=TRUE)) # There are 26 posts with reverse engineer in them.
 
 # Running this returns 4,787 comments
-
+d%>%
+  
 
 d %>% 
   filter_by_anything("reverse engineer")

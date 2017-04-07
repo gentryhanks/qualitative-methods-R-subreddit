@@ -12,13 +12,14 @@ csl: apa.csl
 The embodiment of surveillant technologies provides a means and site of production of data to be consumed by both the self and the medical gaze with physical and emotional consequences. Analyzing discourse on the subreddit r/diabetes, I examine assemblages of surveillant technologies that render an ever-increasing quantified self for those using insulin pumps and glucose monitors. @haraway_simians_1990 brought cyborgs to the fore in the early 1990s and @lupton_technology_2000 describes cyborgs ``When hooked up to medical (and other) technologies, the patient's body becomes a cyborg, a juncture of human flesh and machine'' (p.56). Bodies are rendered regulatable through the use of embodied and disembodied technologies. People with any type of diabetes may be treated with insulin, which can be self-administered through multiple daily injections or through an insulin pump. Insulin pumps, as well as insulin, are proprietary. There is a growing do-it-yourself movement when it comes to hacking the cyborg self. Open source communities have made headway in generating new technology, reappropriating old devices or implementing everyday hacks of hardware and its fleshy interface [@forlano_hacking_2016]. @lupton2016foreword describes these devices and data as intermingling within a data economy, which I argue in the case of diabetes are used in surveillance and the medical gaze. Devices used to manage diabetes quantify the self and datify the device user. These data as perceived by medical practitioners, family members, friends, strangers and last, but not least, the self can have significant effects on everyday life, socio-spatial relations and emotional health.
 
 # Methods and Methodologies: Mixed Methods & Reddit Data Using R
-I have observed the online community called r/diabetes, key word searched through the reddit GUI (graphical user interface), and am using R to analyze user-generated, textual data and its metadata from a subreddit of reddit called r/diabetes. I chose to use reddit data due to its availability. Additionally I chose Reddit because their TOS provides no expectation of prvacy to the users. For today's presentation, I will focus on using R to explore this large data set.
+I have utilized netnography [@robert2015netnography] to explore the online community called r/diabetes including observation (lurking) with screenshots, key word searches through the reddit GUI (graphical user interface), and am using R to analyze user-generated, textual data and its metadata. I chose to use reddit data due to its availability. Additionally I chose Reddit because their TOS provides no expectation of prvacy to the users. While this is a much larger project, for today's presentation, I will focus on using R to explore a large unstructured (textual) data set.
 
 What is R?
-Geographers such as @kitchin_code_2011 discuss the importance and pervasiveness of code and software in our everyday lives. R is a computer programming language developed out of S [@R_2013]. It is an opensource language and a GNU project. It has a large, active contributing community, which is one of its largest assets. A one the most prolific contributors is Hadley Wickham, who developed all of the libraries I use in this project [@wickham2015dplyr].
+Geographers such as @kitchin_code_2011 discuss the importance and pervasiveness of code and software in our everyday lives. R is a computer programming language developed out of S at Bell Labs in the 70s and 80s for statistical computing [@R_2013]. It is an opensource language and under a GNU license. It has a large, active contributing community, which is one of its largest assets. A one the most prolific contributors is Hadley Wickham, who developed all of the libraries I use in this project [@wickham2015dplyr].
 
-Geographers like @crooks2006embodied have used the proprietary software, NVivo, for analyzing text, while geographers like @elwood2009qualitative, @aitken2010gis, @elwood_mixed_2010, and @wilson2015paying have taken traditionally quantitative tools and reappropriated them for qualitative, critical and mixed-method research in GIS; however, there has been little work done using or writing about reappropriating traditionally quantitative opensource tools like R.
-This type of reappropriation could merely be considered an epistemological or methodological challenge that "disrupts efforts to constrain empistemological diversity"" [@elwood_mixed_2010, p. 106]. This research therefore uses both inductive and deductive approaches, which @elwood_mixed_2010 asserts "challenge[s] the proposition that epistemologies are necessarily separate and singular" (p. 107). 
+Geographers like @crooks2006embodied have used the proprietary software, NVivo, for analyzing text, while geographers like @elwood2009qualitative, @aitken2010gis, @elwood_mixed_2010, and @wilson2015paying have taken traditionally quantitative tools and reappropriated them for qualitative, critical and mixed-method research in GIS. Although there is some interest in using R for mapping and spatial analysis [@brunsdon2015introduction], there has been little work done using or writing about reappropriating traditionally quantitative opensource tools like R for analysis of qualitative data.
+
+This type of reappropriation I suggest could be considered an epistemological or methodological challenge that "disrupts efforts to constrain empistemological diversity"" [@elwood_mixed_2010, p. 106]. This research therefore uses both inductive and deductive approaches, which @elwood_mixed_2010 asserts "challenge[s] the proposition that epistemologies are necessarily separate and singular" (p. 107). 
 
 Using R to analayze social media data is not a sort of panacea for looking at larger amounts of data or somehow claiming this way as new and therefore superior, but instead is what @delyser2014crossing call, ``an embrace of engaged methodological pluralism, where different and divergent methods flourish to tackle issues from
 different angles'' (p. 303).
@@ -35,15 +36,26 @@ library(ggplot2) # This is a plotting system for R, also by Hadley Wickham. See 
 
 d <- read_csv("~/Downloads/reddit_diabetes.csv") # This data set was accessed through the reddit API and is publicly available.
 ```
+
+
+The following functions are built into Dplyr.
+
+`mutate()`    Adds new variables that are functions of exisiting variables.
+`select()`    Picks variables based on their names.
+`filter()`    Picks cases based on their values.
+`summarise()` Reduces multiple values down to a single summary.
+`arrange()`   Changes the ordering of the rows.
+
+You can also make your own functions.
 Below I create the `filter_by_anything` function for key word searches.
 ```{r}
 filter_by_anything <- function(.data, pattern) { # Pattern here just means an input to be matched.
   .data %>%
-    filter(grepl(pattern, body))
+    filter(grepl(pattern, body)) # grepl returns a logical vector (match or not for each element of x).
 }
 ```
 
-### How do data producers (in this case people with diabetes who wear insulin pumps or cgms (cyborgs) or those who just use blood glucose meters, access their own data?
+### How do data producers access their own data from meters, pumps and continuous glucose meters (CGMs)?
 ```{r}
 d %>%
   filter_by_anything("data") %>%
@@ -77,7 +89,16 @@ d %>%
   as.data.frame()
 ```
 
+# Another pertinent question: What sorts of problems occur with the fleshy side of the interface?
 
+```{r}
+d %>%
+ filter(grepl("infection", body, ignore.case=TRUE) &
+        grepl("site", body, ignore.case=TRUE)) %>%
+  sample_n(35) %>%
+  as.data.frame()
+  
+```
 
 
 There are so many potential ways to look at unstructured data using R and dplyr, it really is up to the imagination. As you can see it yields some pretty rich data, which ultimately is filtered through the researcher. There are many limitations to this mixing up of methods. Trustworthiness of internet data is of concern [@hartig2008trustworthiness], but there is little incentive to lie in this subreddit.  
