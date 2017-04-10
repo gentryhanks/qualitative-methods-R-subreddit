@@ -31,11 +31,10 @@ library(readr) # Hadley Wickham made readr to make it easier for reading many ki
 library(ggplot2) # This is a plotting system for R, also by Hadley Wickham. See http://ggplot2.org/.
 ```
 ```{r, message=FALSE}
-#a data frame is a data structure like a spreadsheet that uses code instead of a graphical user interface (although it could be argued that this is a graphical user interface.
 
-
-d <- read_csv("~/Downloads/reddit_diabetes.csv") # This data set was accessed through the reddit API and is publicly available.
+d <- read_csv("~/Downloads/reddit_diabetes.csv") # This data set was accessed through the reddit API and is publicly available. #a data frame is a data structure like a spreadsheet that uses code instead of a graphical user interface (although it could be argued that this is a graphical user interface.
 ```
+
 
 
 The following functions are built into Dplyr.
@@ -69,9 +68,8 @@ Or I might try to look at other pertinent key words that would contain discussio
 ```{r}
 d %>%
   filter(grepl(" API ", body, ignore.case=TRUE) | # Means "or"" as in boolean logic (inclusive or)
-           # Space definitely matters here as I has to include them before and after API so it wouldn't include posts             with a word that contained the letters api in them.
            grepl("Wireless", body, ignore.case=TRUE) |
-           grepl(" hack ", body, ignore.case=TRUE) |
+           grepl(" hack ", body, ignore.case=TRUE) | # Space definitely matters here as I has to include them before and after API and hack so it wouldn't include posts             with a word that contained the letters api or hack in them.
            grepl("blue tooth", body, ignore.case=TRUE) |
            grepl("bluetooth", body, ignore.case=TRUE) |
            grepl("reverse engineer", body, ignore.case=TRUE)) %>%
@@ -100,8 +98,10 @@ d %>%
   
 ```
 
+The comments reveal that the fleshy interface must be rotated every several days, if not, a site can become infected and/or cause poor insulin infusion resulting in high blood glucose. 
 
-There are so many potential ways to look at unstructured data using R and dplyr, it really is up to the imagination. As you can see it yields some pretty rich data, which ultimately is filtered through the researcher. There are many limitations to this mixing up of methods. Trustworthiness of internet data is of concern [@hartig2008trustworthiness], but there is little incentive to lie in this subreddit.  
+There are so many potential ways to look at unstructured data using R and dplyr, it really is up to the imagination. As you can see it yields some pretty rich data, which ultimately is filtered through the researcher. There are many limitations to this mixing up of methods. 
+
 
 The larger reddit data corpus is publicly available at https://archive.org/details/2015_reddit_comments_corpus. To make this data set and code available and accessible, I am hosting it in an S3 bucket through Amazon Web Services (AWS). It is also important, from a feminist methodological perspective, to make my research available to the community with whose data I worked and will post my github repository as well as my r notebook https://s3.amazonaws.com/gentryhanks-analysis/RedditAnalysis.nb.html to the subreddit once completed. Using r notebook also makes my research readily available through auto generation of html for immediate web hosting.  
 
@@ -109,7 +109,12 @@ Insulin pump and continuous glucose monitor users generate large amounts of data
 
 
 # Discussion Questions
+What about trustworthiness of internet data [@hartig2008trustworthiness]? There is little incentive to lie in this subreddit. 
+Ethics of netnography?
 
+Theoretical hurdles?
+
+# I'd like to thank Christopher Peters, the users of r/diabetes, Queen's University, and the organizers of this session.
 
 
 
